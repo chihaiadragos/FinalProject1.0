@@ -6,22 +6,21 @@ import lombok.*;
 import java.util.List;
 
 @Entity
-@Table(name = "branches")
+@Table(name = "customers")
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class Branch {
+public class Customer {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String branchName;
-    private String city;
+    private String firstName;
+    private String lastName;
+    private String email;
     private String address;
-    @OneToMany(mappedBy = "branch")
-    private List<Car> cars;
-    @OneToMany(mappedBy = "branch")
-    private List<Employee> employees;
-
+    @OneToMany(mappedBy = "customer")
+    private List<Reservation> reservations;
 }
