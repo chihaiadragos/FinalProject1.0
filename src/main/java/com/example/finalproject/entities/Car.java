@@ -4,7 +4,6 @@ import com.example.finalproject.enums.StatusAvailabilityCar;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,7 +12,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+//@Builder
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +26,7 @@ public class Car {
     private Double amount;
     private String imageUrl;
     private StatusAvailabilityCar statusAvailabilityCar;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     private Branch branch;
     @OneToMany(mappedBy = "car")

@@ -1,5 +1,6 @@
 package com.example.finalproject.services;
 
+import com.example.finalproject.entities.Branch;
 import com.example.finalproject.entities.Car;
 import com.example.finalproject.repositories.CarRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +26,8 @@ public class CarService {
         }
         return foundCar.get();
     }
-    public Car update(Car car) {
-        Car updatedCar = getById(car.getId());
+    public Car update(Long id, Car car) {
+        Car updatedCar = getById(id);
 
         updatedCar.setBrand(car.getBrand());
         updatedCar.setModel(car.getModel());
@@ -41,14 +42,18 @@ public class CarService {
         return carRepository.save(updatedCar);
     }
 
-    public void delete(Long id) {
+    public Car delete(Long id) {
         Car deletedCar = getById(id);
-        carRepository.delete(deletedCar);
+        carRepository.deleteById(id);
+        return deletedCar;
     }
 
     public List<Car> getAll(){
         return carRepository.findAll();
     }
 
+    public List<Car> getCarsByBranch(Branch branch) {
+        return carRepository.findAllByBranch(branch);
+    }
 
 }
